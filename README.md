@@ -98,6 +98,12 @@ node server.js
 
 ```
 PrepMate-AI/
+├── controllers/
+│   ├── authController.js
+│   ├── materialController.js
+│   ├── aiController.js
+│   ├── essayController.js
+│   └── planController.js
 ├── models/
 │   ├── User.js
 │   └── Material.js
@@ -112,7 +118,9 @@ PrepMate-AI/
 ├── uploads/            ← Stores uploaded PDFs
 ├── .env                ← Your secrets and API keys
 ├── server.js           ← Main server file
+├── package.json        ← Node.js dependencies
 └── README.md           ← This file
+
 ```
 
 ---
