@@ -15,5 +15,5 @@ Thumbs.db
 .vscode/
 .idea/
 
-#test file
+# Test file
 test.js
