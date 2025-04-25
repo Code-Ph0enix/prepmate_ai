@@ -1,5 +1,5 @@
 const { OpenAI } = require('openai');
-const openai = new OpenAI({ apiKey: process.env.OPENAI_API_KEY });
+const openai = new OpenAI({ apiKey: process.env.GEMINI_API_KEY });
 
 exports.createStudyPlan = async (req, res) => {
   const { exam, daysLeft, strengths, weaknesses } = req.body;

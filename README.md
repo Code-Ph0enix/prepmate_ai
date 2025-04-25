@@ -81,7 +81,7 @@ npm install
 Create a `.env` file and include:
 ```env
 MONGO_URI=your_mongodb_uri
-OPENAI_API_KEY=your_openai_key
+GEMINI_API_KEY=your_gemini_key
 JWT_SECRET=your_jwt_secret
 ```
 

@@ -10,7 +10,7 @@ const materialRoutes = require('./backend/routes/materialRoutes');
 const authMiddleware = require('./middleware/auth');
 
 dotenv.config();
-console.log(process.env.OPENAI_API_KEY);  // Check if OpenAI API key is being loaded
+console.log(process.env.GEMINI_API_KEY);  // gemini key used.
 
 const app = express();
 app.use(cors());
