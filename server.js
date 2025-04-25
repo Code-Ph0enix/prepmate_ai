@@ -10,6 +10,7 @@ const materialRoutes = require('./routes/materialRoutes');
 const authMiddleware = require('./middleware/auth');
 
 dotenv.config();
+console.log(process.env.OPENAI_API_KEY);  // Check if OpenAI API key is being loaded
 
 const app = express();
 app.use(cors());
