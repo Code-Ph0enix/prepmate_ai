@@ -7,7 +7,7 @@ const essayRoutes = require('./backend/routes/essayRoutes');
 const planRoutes = require('./backend/routes/planRoutes');
 const userRoutes = require('./backend/routes/userRoutes');
 const materialRoutes = require('./backend/routes/materialRoutes');
-const authMiddleware = require('./middleware/auth');
+const authMiddleware = require('./backend/middleware/auth');
 
 dotenv.config();
 console.log(process.env.GEMINI_API_KEY);  // gemini key used.
