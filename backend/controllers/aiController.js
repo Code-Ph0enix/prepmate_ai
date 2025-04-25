@@ -1,30 +1,24 @@
-const { OpenAIApi, Configuration } = require("openai");
+const { GoogleGenerativeAI } = require("@google/generative-ai");
 require("dotenv").config();
 
-const configuration = new Configuration({
-  apiKey: process.env.GEMINI_API_KEY
-});
-
-const openai = new OpenAIApi(configuration);
+const genAI = new GoogleGenerativeAI(process.env.GEMINI_API_KEY);
+const model = genAI.getGenerativeModel({ model: "gemini-1.5-flash" }); // use gemini-pro or gemini-1.5-flash
 
 // @desc Answer doubts via chat
 // @route POST /api/ai/chat
 // @access Public
 const askDoubt = async (req, res) => {
   const { prompt } = req.body;
-
   if (!prompt) return res.status(400).json({ message: "Prompt is required" });
 
   try {
-    const response = await openai.createChatCompletion({
-      model: "gpt-3.5-turbo",
-      messages: [{ role: "user", content: prompt }]
-    });
+    const result = await model.generateContent(prompt);
+    const response = await result.response;
+    const text = response.text();
 
-    const reply = response.data.choices[0].message.content;
-    res.status(200).json({ response: reply });
+    res.status(200).json({ response: text });
   } catch (error) {
-    console.error("AI Error:", error.response?.data || error.message);
+    console.error("AI Error:", error.message);
     res.status(500).json({ message: "Failed to get AI response" });
   }
 };
@@ -34,7 +28,6 @@ const askDoubt = async (req, res) => {
 // @access Public
 const evaluateEssay = async (req, res) => {
   const { essayText } = req.body;
-
   if (!essayText) return res.status(400).json({ message: "Essay text is required" });
 
   try {
@@ -44,17 +37,14 @@ Evaluate this essay based on clarity, structure, grammar, coherence, and vocabul
 Give a score out of 10 and suggestions for improvement.
 
 Essay: ${essayText}
-`;
+    `;
+    const result = await model.generateContent(evaluationPrompt);
+    const response = await result.response;
+    const text = response.text();
 
-    const response = await openai.createChatCompletion({
-      model: "gpt-3.5-turbo",
-      messages: [{ role: "user", content: evaluationPrompt }]
-    });
-
-    const feedback = response.data.choices[0].message.content;
-    res.status(200).json({ feedback });
+    res.status(200).json({ feedback: text });
   } catch (error) {
-    console.error("Essay Eval Error:", error.response?.data || error.message);
+    console.error("Essay Eval Error:", error.message);
     res.status(500).json({ message: "Failed to evaluate essay" });
   }
 };
@@ -64,7 +54,6 @@ Essay: ${essayText}
 // @access Public
 const generateStudyPlan = async (req, res) => {
   const { exam, daysAvailable, studyHours } = req.body;
-
   if (!exam || !daysAvailable || !studyHours) {
     return res.status(400).json({ message: "Missing input fields" });
   }
@@ -76,17 +65,14 @@ Include:
 - Daily focus topics
 - Revision days
 - Mock tests and strategies
-`;
+    `;
+    const result = await model.generateContent(planPrompt);
+    const response = await result.response;
+    const text = response.text();
 
-    const response = await openai.createChatCompletion({
-      model: "gpt-3.5-turbo",
-      messages: [{ role: "user", content: planPrompt }]
-    });
-
-    const plan = response.data.choices[0].message.content;
-    res.status(200).json({ plan });
+    res.status(200).json({ plan: text });
   } catch (error) {
-    console.error("Plan Error:", error.response?.data || error.message);
+    console.error("Plan Error:", error.message);
     res.status(500).json({ message: "Failed to generate study plan" });
   }
 };

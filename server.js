@@ -2,7 +2,7 @@ const express = require('express');
 const cors = require('cors');
 const dotenv = require('dotenv');
 const mongoose = require('mongoose');
-const openaiRoutes = require('./backend/routes/openaiRoutes');
+const geminiRoutes = require('./backend/routes/geminiRoutes');
 const essayRoutes = require('./backend/routes/essayRoutes');
 const planRoutes = require('./backend/routes/planRoutes');
 const userRoutes = require('./backend/routes/userRoutes');
@@ -20,7 +20,7 @@ app.use('/uploads', express.static('uploads')); // Serve uploaded files
 // Routes
 app.use('/api/user', userRoutes);
 app.use('/api/material', authMiddleware, materialRoutes);
-app.use('/api/ai', openaiRoutes); // Public
+app.use('/api/ai', geminiRoutes); // Public
 app.use('/api/essay', essayRoutes); // Public
 app.use('/api/plan', planRoutes); // Public
 
