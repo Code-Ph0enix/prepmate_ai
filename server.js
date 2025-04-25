@@ -10,7 +10,7 @@ const materialRoutes = require('./backend/routes/materialRoutes');
 const authMiddleware = require('./backend/middleware/auth');
 
 dotenv.config();
-console.log(process.env.GEMINI_API_KEY);  // gemini key used.
+console.log("gemini connected");  // gemini key used.
 
 const app = express();
 app.use(cors());
