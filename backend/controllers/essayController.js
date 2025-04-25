@@ -2,7 +2,7 @@ const { GoogleGenerativeAI } = require('@google/generative-ai');
 require('dotenv').config();
 
 const genAI = new GoogleGenerativeAI(process.env.GEMINI_API_KEY);
-const model = genAI.getGenerativeModel({ model: 'gemini-pro' }); // You can also try gemini-1.5-pro if needed
+const model = genAI.getGenerativeModel({ model: 'gemini-1.5-flash' }); // You can also try gemini-1.5-pro if needed
 
 exports.evaluateEssay = async (req, res) => {
   const { essayText, examType } = req.body;
