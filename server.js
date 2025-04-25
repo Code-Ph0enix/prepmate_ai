@@ -2,11 +2,11 @@ const express = require('express');
 const cors = require('cors');
 const dotenv = require('dotenv');
 const mongoose = require('mongoose');
-const openaiRoutes = require('./routes/openaiRoutes');
-const essayRoutes = require('./routes/essayRoutes');
-const planRoutes = require('./routes/planRoutes');
-const userRoutes = require('./routes/userRoutes');
-const materialRoutes = require('./routes/materialRoutes');
+const openaiRoutes = require('./backend/routes/openaiRoutes');
+const essayRoutes = require('./backend/routes/essayRoutes');
+const planRoutes = require('./backend/routes/planRoutes');
+const userRoutes = require('./backend/routes/userRoutes');
+const materialRoutes = require('./backend/routes/materialRoutes');
 const authMiddleware = require('./middleware/auth');
 
 dotenv.config();
