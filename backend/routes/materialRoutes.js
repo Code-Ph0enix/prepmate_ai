@@ -7,8 +7,8 @@ const { protect } = require('../middleware/auth'); // Import auth middleware (yo
 
 // Configure multer storage
 const storage = multer.diskStorage({
-  destination: (_req, _file, cb) => cb(null, 'uploads/'), // Set upload folder
-  filename: (_req, file, cb) => cb(null, `${Date.now()}-${file.originalname}`) // Set unique filename
+  destination: (req, file, cb) => cb(null, 'uploads/'), // Set upload folder
+  filename: (req, file, cb) => cb(null, `${Date.now()}-${file.originalname}`) // Set unique filename
 });
 
 // Initialize multer with defined storage
