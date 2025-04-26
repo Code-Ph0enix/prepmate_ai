@@ -21,7 +21,7 @@ app.use('/uploads', express.static('uploads')); // Serve uploaded files
 
 // Routes
 app.use('/api/user', userRoutes);
-app.use('/api/material', authMiddleware, materialRoutes);
+app.use('/api/material', materialRoutes);
 app.use('/api/ai', geminiRoutes); // Public
 app.use('/api/essay', essayRoutes); // Public
 app.use('/api/plan', planRoutes); // Public
