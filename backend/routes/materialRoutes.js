@@ -1,7 +1,7 @@
 const express = require('express'); // Import express
 const multer = require('multer'); // Import multer for file uploads
 const router = express.Router(); // Initialize router
-const Material = require('../models/Material'); // Import Material model
+// const Material = require('../models/Material'); // Import Material model
 const { uploadMaterial, getMyMaterials } = require('../controllers/materialController'); // Import controllers
 const { protect } = require('../middleware/auth'); // Import auth middleware (you should create this if not yet)
 
