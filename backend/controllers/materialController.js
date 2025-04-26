@@ -4,7 +4,7 @@ const Material = require("../models/Material"); // Import Material model
 // @desc Upload and save a PDF file reference
 // @route POST /api/material/upload
 // @access Private
-export const uploadMaterial = async (req, res) => {
+const uploadMaterial = async (req, res) => {
   try {
     // Check if a file was uploaded
     if (!req.file) {
@@ -39,7 +39,7 @@ export const uploadMaterial = async (req, res) => {
 // @desc Get all materials uploaded by the user
 // @route GET /api/material/my-materials
 // @access Private
-export const getMyMaterials = async (req, res) => {
+const getMyMaterials = async (req, res) => {
   try {
     // Check if user info is present
     if (!req.user || !req.user.id) {
@@ -57,7 +57,7 @@ export const getMyMaterials = async (req, res) => {
   }
 };
 
-// module.exports = {
-//   uploadMaterial,
-//   getMyMaterials
-// };
+module.exports = {
+  uploadMaterial,
+  getMyMaterials
+};
