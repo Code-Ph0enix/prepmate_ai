@@ -1,37 +1,23 @@
-const express = require('express');
-const multer = require('multer');
-const path = require('path');
-const Material = require('../models/Material');
-const router = express.Router();
+const express = require('express'); // Import express
+const multer = require('multer'); // Import multer for file uploads
+const router = express.Router(); // Initialize router
+const Material = require('../models/Material'); // Import Material model
+const { uploadMaterial, getMyMaterials } = require('../controllers/materialController'); // Import controllers
+const { protect } = require('../middleware/authMiddleware'); // Import auth middleware (you should create this if not yet)
 
+// Configure multer storage
 const storage = multer.diskStorage({
-  destination: (req, file, cb) => cb(null, 'uploads/'),
-  filename: (req, file, cb) => cb(null, `${Date.now()}-${file.originalname}`)
+  destination: (req, file, cb) => cb(null, 'uploads/'), // Set upload folder
+  filename: (req, file, cb) => cb(null, `${Date.now()}-${file.originalname}`) // Set unique filename
 });
 
+// Initialize multer with defined storage
 const upload = multer({ storage });
 
-router.post('/upload', upload.single('file'), async (req, res) => {
-  try {
-    const material = new Material({
-      filename: req.file.filename,
-      originalname: req.file.originalname,
-      uploadedBy: req.user.id
-    });
-    await material.save();
-    res.json({ message: 'File uploaded', material });
-  } catch (err) {
-    res.status(500).json({ message: 'Upload failed' });
-  }
-});
+// Upload route - private
+router.post('/upload', protect, upload.single('file'), uploadMaterial);
 
-router.get('/my-materials', async (req, res) => {
-  try {
-    const materials = await Material.find({ uploadedBy: req.user.id });
-    res.json(materials);
-  } catch (err) {
-    res.status(500).json({ message: 'Fetching failed' });
-  }
-});
+// Get user's materials - private
+router.get('/my-materials', protect, getMyMaterials);
 
-module.exports = router;
+module.exports = router; // Export router
