@@ -3,7 +3,7 @@ const multer = require('multer'); // Import multer for file uploads
 const router = express.Router(); // Initialize router
 const Material = require('../models/Material'); // Import Material model
 const { uploadMaterial, getMyMaterials } = require('../controllers/materialController'); // Import controllers
-const { protect } = require('../middleware/authMiddleware'); // Import auth middleware (you should create this if not yet)
+const { protect } = require('../middleware/auth'); // Import auth middleware (you should create this if not yet)
 
 // Configure multer storage
 const storage = multer.diskStorage({
